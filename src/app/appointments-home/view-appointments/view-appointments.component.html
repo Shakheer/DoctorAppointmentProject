@@ -1,0 +1,34 @@
+<div style ="background-color:whitesmoke; height: max-content;">
+  <div class="flex-row d-flex justify-content-center h3">Booked Appointments</div><hr>
+  <div class = "flex-row d-flex justify-content-center">
+    <div class="table-responsive">
+        <table class="table table-hover table-sm  text-center table-bordered" >
+            <thead style="background-color: teal; color: white">
+              <tr>
+                <th scope="col">Appointment ID</th>
+                <th scope="col">Hospital</th>
+                <th scope="col">Doctor name</th>
+                <th scope="col">Appointment Date</th>
+                <th scope="col">Appointment Time</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let appointment of appointments,let i= index  " [ngClass] = "{'bg-danger text-white' : appointment.state == 'C'}">
+                <th scope="row">{{appointment.aid}}</th>
+                <td>{{appointment.hospital}}</td>
+                <td>{{appointment.doctor}}</td>
+                <td>{{appointment.doa | date:'dd/MM/YYYY'}}</td>
+                <td>{{appointment.time}}</td>
+                <td>{{appointment.state}}</td>
+                <td><button class="btn btn-secondary" [routerLink] = "['/home/updateappointment', appointment.aid]">Edit</button></td>
+              </tr>
+              <tr *ngIf = "appointments.length == 0"><td colspan="7">No Appointments booked!</td></tr>
+            </tbody>
+          </table>
+        </div>
+  </div>
+    
+
+</div>

@@ -1,0 +1,17 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink='/home/viewappointment'><img src="./assets/MenuIcon.png" style="height: 50px; width: 50px;"></a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" routerLink='/home/viewappointment'>Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" routerLink='/home/bookappointment'>Book Appointment</a>
+      </div>
+    </div>
+    <pre class="font-italic mt-3">Welcome {{username}}! </pre>
+    <button class="btn btn-danger float-left" (click) = 'onSignoutClick()'>Signout</button>
+  </nav>
+  
+  <router-outlet></router-outlet>
