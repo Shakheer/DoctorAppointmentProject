@@ -5,13 +5,13 @@
                 <div class="card-header">
                     <h4>Register</h4>
                 </div>
-                <div class="card-body"  style="max-height: 250px; overflow-y: scroll;">
+                <div class="card-body"  style="max-height: 300px; overflow-y: scroll;">
                     
                         <div class="form-group">
 
 
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Name"
+                            <input autocomplete="off" type="text" class="form-control" id="name" placeholder="Name"
                             formControlName = "name" [ngClass] = "{'is-invalid' : RegisterForm.get('name').touched && RegisterForm.get('name').invalid}" >
                             <div style="position: relative;"  class="invalid-tooltip" *ngIf = "RegisterForm.get('name').touched && RegisterForm.get('name').invalid">
                                 <div *ngIf = "RegisterForm.get('name').errors.required">
@@ -24,7 +24,7 @@
 
 
                             <label for="username">User Name</label>
-                            <input type="text" class="form-control" id="username" placeholder="User name"
+                            <input autocomplete="off" type="text" class="form-control" id="username" placeholder="User name"
                             formControlName = "userName" [ngClass] = "{'is-invalid' : RegisterForm.get('userName').touched && RegisterForm.get('userName').invalid}" >
                             <div style="position: relative;"  class="invalid-tooltip" *ngIf = "RegisterForm.get('userName').touched && RegisterForm.get('userName').invalid">
                                 <div *ngIf = "RegisterForm.get('userName').errors.required">
@@ -37,21 +37,58 @@
 
 
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password"
-                            formControlName = "password">
+                            <input  autocomplete="off" type="password" class="form-control" id="password" placeholder="Password"
+                            formControlName = "password" [ngClass] = "{'is-invalid' : RegisterForm.get('password').touched && RegisterForm.get('password').invalid}">
+                            <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('password').touched && RegisterForm.get('password').invalid">
+                                <div *ngIf = "RegisterForm.get('password').errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf = "RegisterForm.get('password').errors.pattern">
+                                    Password must contain atleast 6 characters including upper case, lower case letters and numbers.
+                                </div>
+                            </div>
 
                             <label for="guardianName">Guardian Name</label>
-                            <input type="text" class="form-control" id="guardianName" placeholder="Guardian Name"
-                            formControlName = "guardianName">
+                            <input  autocomplete="off" type="text" class="form-control" id="guardianName" placeholder="Guardian Name"
+                            formControlName = "guardianName"  [ngClass] = "{'is-invalid' : RegisterForm.get('guardianName').touched && RegisterForm.get('guardianName').invalid}">
+                            <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('guardianName').touched && RegisterForm.get('guardianName').invalid">
+                                <div *ngIf = "RegisterForm.get('guardianName').errors.required">
+                                    Guardian name is required.
+                                </div>
+                                <div *ngIf = "RegisterForm.get('guardianName').errors.pattern">
+                                    Guardian name must contain only alphabets with length 3 to 15 characters.
+                                </div>
+                            </div>
 
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" placeholder="Address"
-                            formControlName = "address">
-                            
+                            <input  autocomplete="off" type="text" class="form-control" id="address" placeholder="Address"
+                            formControlName = "address" [ngClass] = "{'is-invalid' : RegisterForm.get('address').touched && RegisterForm.get('address').invalid}">
+                            <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('address').touched && RegisterForm.get('address').invalid">
+                                <div *ngIf = "RegisterForm.get('address').errors.required">
+                                    Username is required.
+                                </div>
+                                <div *ngIf = "RegisterForm.get('address').errors.pattern">
+                                    Address must contain only alphabets with length 5 to 50 characters.
+                                </div>
+                            </div>
+
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Email"
-                            formControlName = "email">
-                            <div class="form-group form-group-row">
+                            <input  autocomplete="off" type="text" class="form-control" id="email" placeholder="Email"
+                            formControlName = "email"  [ngClass] = "{'is-invalid' : RegisterForm.get('email').touched && RegisterForm.get('email').invalid}">
+                            <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('email').touched && RegisterForm.get('email').invalid">
+                                <div *ngIf = "RegisterForm.get('email').errors.required">
+                                    Email is required.
+                                </div>
+                                <div *ngIf = "RegisterForm.get('email').errors.email">
+                                    Invalid email.
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-row" >
                                 <label for="gender">Gender</label><br>
                                 <div class="form-check-lable form-check-inline">
                                     <input type="radio" class="form-check-input" name = "gender" value = "Male" id="Male"
@@ -66,20 +103,45 @@
                             </div>
                             <label for="maritalStatus">Marital Status</label>
                             <select class="form-control" id="maritalStatus"
-                            formControlName = "maritalStatus" name="maritalStatus">
+                            formControlName = "maritalStatus" name="maritalStatus"  [ngClass] = "{'is-invalid' : RegisterForm.get('maritalStatus').touched && RegisterForm.get('maritalStatus').invalid}">
                                 <option value="null" selected>Select</option>
                                 <option value="M">Married</option>
                                 <option value="S">Single</option>
                                 <option value="D">Divorced</option>
                                 <option value="W">Widowed</option>
                         </select>
+                        <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('maritalStatus').touched && RegisterForm.get('maritalStatus').invalid">
+                                <div *ngIf = "RegisterForm.get('maritalStatus').errors.required">
+                                    Marital status is required.
+                                </div>
+                            </div>
+
                             <label for="contNumber">Contact Number</label>
                             <input type="text" class="form-control" id="contNumber" placeholder="Contact No."
-                            formControlName = "contact">
+                            formControlName = "contact"  [ngClass] = "{'is-invalid' : RegisterForm.get('contact').touched && RegisterForm.get('contact').invalid}">
+                            <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('contact').touched && RegisterForm.get('contact').invalid">
+                                <div *ngIf = "RegisterForm.get('contact').errors.required">
+                                    Contact number is required.
+                                </div>
+                                <div *ngIf = "RegisterForm.get('contact').errors.pattern">
+                                    Contact number must contain 10 numbers.
+                                </div>
+                            </div>
                         </div>
                         <label for="dob">Date of Birth</label>
                         <input type="text" bsDatepicker [bsConfig] = "registerDatepick" class="form-control" id="dob" placeholder="DD/MM/YYYY"
-                        formControlName = "dob">
+                        formControlName = "dob" [ngClass] = "{'is-invalid' : RegisterForm.get('dob').touched && RegisterForm.get('dob').invalid}">
+                        <div style="position: relative;" class="invalid-tooltip" *ngIf = 
+                            "RegisterForm.get('dob').touched && RegisterForm.get('dob').invalid">
+                                <div *ngIf = "RegisterForm.get('dob').errors.required">
+                                    Date of birth is required.
+                                </div>
+                                <div *ngIf = "RegisterForm.get('dob').errors.invalidDob">
+                                    Minimum age should be 18 years.
+                                </div>
+                        </div>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-success float-right" (click) = "onRegisterClick()"

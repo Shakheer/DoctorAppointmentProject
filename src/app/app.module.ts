@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserServiceService } from './services/user-service.service';
 import { AppointmentService } from './services/appointment.service';
 import { DatePipe } from '@angular/common';
+import { JwtModule } from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -35,9 +36,18 @@ import { DatePipe } from '@angular/common';
     CommonModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {return localStorage.getItem('token')},
+        allowedDomains: ["http://localhost:4200/"],
+        disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    })
   ],
   providers: [UserServiceService,AppointmentService,DatePipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}

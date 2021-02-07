@@ -15,7 +15,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.signInForm = new FormGroup({
       userName : new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z]{3,8}$')]),
-      password : new FormControl('', Validators.required)
+      password : new FormControl('', [Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$')])
     });
   }
   onSubmitClick(){ console.log(this.signInForm.value);

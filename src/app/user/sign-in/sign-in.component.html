@@ -25,7 +25,10 @@
                             <div *ngIf = "signInForm.get('password').errors.required">
                                 Password is required.
                             </div>
+                            <div *ngIf = "signInForm.get('password').errors.pattern">
+                                Password must contain atleast 6 characters including upper case, lower case letters and numbers.
                             </div>
+                        </div>
                         </div>
                         
                     

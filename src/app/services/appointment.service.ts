@@ -29,9 +29,24 @@ export class AppointmentService {
     let headers = new HttpHeaders().set('Authorization','Bearer '+localStorage.getItem('token'));
     return this._http.get('http://localhost:53230/api/Appointment/GetAppointments',{'headers': headers});
   }
+
   getAppointment(aid:string)
   {
     let headers = new HttpHeaders().set('Authorization','Bearer '+localStorage.getItem('token'));
     return this._http.get('http://localhost:53230/api/Appointment/GetAppointment/'+aid,{'headers': headers});
+  }
+
+  getHospitals()
+  {
+    let headers = new HttpHeaders().set('Authorization','Bearer '+localStorage.getItem('token'));
+    return this._http.get('http://localhost:53230/api/Appointment/GetHospitals',{'headers': headers});
+ 
+  }
+
+  getDoctors(id:any)
+  {
+    let headers = new HttpHeaders().set('Authorization','Bearer '+localStorage.getItem('token'));
+    return this._http.get('http://localhost:53230/api/Appointment/GetDoctors/'+id,{'headers': headers});
+ 
   }
 }

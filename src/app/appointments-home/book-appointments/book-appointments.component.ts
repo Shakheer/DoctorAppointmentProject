@@ -5,6 +5,8 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AppointmentsModel } from 'src/app/Models/appointments-model';
 import { DatePipe } from '@angular/common';
+import { Hospital } from 'src/app/Models/hospital';
+import { Doctor } from 'src/app/Models/doctor';
 
 @Component({
   selector: 'app-book-appointments',
@@ -15,6 +17,8 @@ export class BookAppointmentsComponent implements OnInit {
   bookAptDatepick : Partial<BsDatepickerConfig>;
   AppointmentForm : FormGroup;
   appointid: string;
+  hospitals: Hospital[];
+  doctors: Doctor[];
   pageTitle: string = "Book Appointment";
   constructor(private _datepipe : DatePipe ,private _route: Router, private _aroute: ActivatedRoute ,private _appointmentService: AppointmentService) { 
     this.bookAptDatepick = Object.assign({},{
@@ -23,12 +27,22 @@ export class BookAppointmentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._appointmentService.getHospitals().subscribe(
+      (data:any) => {
+        console.log(data);
+        this.hospitals = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   this.appointid = this._aroute.snapshot.paramMap.get('aid');
   console.log('aid :'+ this.appointid);
     if(this.appointid !== null){
       this.pageTitle = "Update Appointment";
       this._appointmentService.getAppointment(this.appointid).subscribe(
         (res:any) => {console.log(res);
+          this.onHospitalChange(res.hospital);
           this.AppointmentForm.patchValue({
             hospital : res.hospital,
             doctor : res.doctor,
@@ -45,11 +59,11 @@ export class BookAppointmentsComponent implements OnInit {
     }
 
     this.AppointmentForm = new FormGroup({
-      hospital : new FormControl(),
-      doctor : new FormControl(),
-      doa : new FormControl(null),
-      time : new FormControl(null),
-      state : new FormControl(null)
+      hospital : new FormControl(null ,Validators.required),
+      doctor : new FormControl(null, Validators.required),
+      doa : new FormControl('',Validators.required),
+      time : new FormControl('',[Validators.required, Validators.pattern('^(([0]?[9]?|[1]?[0-9]|2[0]):[0-5][0-9])|(21:00)$') ]),
+      state : new FormControl('A')
     });
   }
   OnSubmitClick(){
@@ -92,9 +106,29 @@ export class BookAppointmentsComponent implements OnInit {
 
   OnResetClick(){
     this.AppointmentForm.reset();
+    this.AppointmentForm.controls.state.setValue('A');
   }
 
   OnCancelClick(){
     this._route.navigate(['ViewAppointments']);
   }
+
+  onHospitalChange(id:any){console.log(id);
+    if(id !== 'null'){
+      this._appointmentService.getDoctors(id).subscribe(
+        (response:any) => {console.log(response);
+          this.doctors = response;
+        
+        //this._route.navigate(['home/viewappointment']);
+      },
+        (error:any) => {
+            console.log(error);
+          }
+      );}
+    else{
+      this.AppointmentForm.controls.doctor.setValue(null);
+      this.AppointmentForm.controls.hospital.setValue(null);
+    }
+  }
+  
 }
